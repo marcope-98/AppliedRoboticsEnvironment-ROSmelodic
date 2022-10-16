@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(lego_robot)
 
+cmake_policy(SET CMP0054 OLD)
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
@@ -15,7 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
     tf2
     )
 
-find_package(gazebo 7 REQUIRED)
+find_package(gazebo 9 REQUIRED)
 #find_package(Boost REQUIRED COMPONENTS thread)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)

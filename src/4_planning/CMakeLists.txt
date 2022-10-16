@@ -111,7 +111,7 @@ catkin_package(
   INCLUDE_DIRS include
   #LIBRARIES planning
   CATKIN_DEPENDS project_interface geometry_msgs message_runtime nav_msgs std_msgs roscpp
-  DEPENDS system_lib
+  #DEPENDS system_lib # ??????
 )
 
 ###########

@@ -4,14 +4,14 @@ project(project_interface)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
-find_package(OpenCV REQUIRED )
+find_package(OpenCV 3 REQUIRED)
 find_package(catkin REQUIRED)
 
 catkin_package(
    INCLUDE_DIRS include
    LIBRARIES student professor
    CATKIN_DEPENDS 
-   DEPENDS opencv
+   DEPENDS OpenCV
 )
 
 ## Specify additional locations of header files

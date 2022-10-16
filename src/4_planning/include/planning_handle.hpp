@@ -51,7 +51,7 @@ private:
   //std::vector<std::pair<int,Polygon>> victim_list_;
   Polygon gate_, borders_;
   std::vector<float> x_, y_, theta_;
-  double x0_, x1_, x2_, y0_, y1_, y2_, theta0_, theta1_, theta2_;
+  float x0_, x1_, x2_, y0_, y1_, y2_, theta0_, theta1_, theta2_;
   std::vector<Path> path_;
 
   std_msgs::Header header_;

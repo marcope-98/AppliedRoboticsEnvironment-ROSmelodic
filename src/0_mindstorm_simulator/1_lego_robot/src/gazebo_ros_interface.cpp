@@ -13,6 +13,7 @@
 
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/TwistWithCovarianceStamped.h>
+#include <ignition/math.hh>
 
 #include <ctime>
 #include <iostream>
@@ -151,11 +152,11 @@ void LegoModelPlugin::Reset()
     update_from_last_cmd_ = 0;
     last_sim_time_ = 0;
 
-    gazebo::math::Pose pose;     
-    pose = model_->GetWorldPose();
-    x_car_     = pose.pos.x;
-    y_car_     = pose.pos.y;
-    yaw_car_   = pose.rot.GetYaw();
+    ignition::math::Pose3d pose;  
+    pose = model_->WorldPose();
+    x_car_     = pose.Pos().X();
+    y_car_     = pose.Pos().Y();
+    yaw_car_   = pose.Rot().Yaw();
     v_car_     = 0;
     yaw_r_car_ = 0;
 }
@@ -167,16 +168,16 @@ void LegoModelPlugin::onUpdate()
     //static bool msg_sent = false; 
     //static bool initialized = false;
     if(!initialized){
-        gazebo::math::Pose pose;     
-        pose = model_->GetWorldPose();
-        x_car_     = pose.pos.x;
-        y_car_     = pose.pos.y;
-        yaw_car_   = pose.rot.GetYaw();
+        ignition::math::Pose3d pose;  
+        pose = model_->WorldPose();
+        x_car_     = pose.Pos().X();
+        y_car_     = pose.Pos().Y();
+        yaw_car_   = pose.Rot().Yaw();
         initialized = true;
     }
 
     std::lock_guard<std::mutex> lock(mtx_);
-    common::Time curTime = world_->GetSimTime();
+    common::Time curTime = world_->SimTime();
     double dt = 0.0;
     if (!isLoopTime(curTime, dt)) {
         return;
@@ -307,9 +308,9 @@ bool LegoModelPlugin::isLoopTime(const common::Time &time, double &dt)
 
 void LegoModelPlugin::setModelState() 
 {    
-    const math::Pose    pose(x_car_, y_car_, 0.0, 0, 0.0, yaw_car_);
-    const math::Vector3 vel(v_car_, 0, 0.0);
-    const math::Vector3 angular(0.0, 0.0, yaw_r_car_);
+    const ignition::math::Pose3d   pose(x_car_, y_car_, 0.0, 0, 0.0, yaw_car_);
+    const ignition::math::Vector3d vel(v_car_, 0, 0.0);
+    const ignition::math::Vector3d angular(0.0, 0.0, yaw_r_car_);
     model_->SetWorldPose(pose);
     model_->SetAngularVel(angular);
     model_->SetLinearVel(vel);

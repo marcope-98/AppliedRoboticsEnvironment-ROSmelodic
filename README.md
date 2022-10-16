@@ -8,8 +8,8 @@ In this course the student will be introduced to a complete methodology for desi
 - testing of the solution in simulation and on the field
 
 ## Prerequisites/Dependencies
-* Linux 16.04
-* Gazebo >= 7.16
-* ROS Kinetic
+* Linux 18.04
+* Gazebo >= 9.0.0
+* ROS Melodic
 * make >= 4.1
-* gcc/g++ >= 5.4
+* gcc/g++ >= 7.5.0
